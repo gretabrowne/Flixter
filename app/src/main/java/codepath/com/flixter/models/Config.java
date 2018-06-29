@@ -3,7 +3,9 @@ package codepath.com.flixter.models;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.parceler.Parcel;
 
+@Parcel
 public class Config {
     String imageBaseUrl;
     String posterSize;
@@ -21,6 +23,8 @@ public class Config {
         JSONArray backdropSizeOptions = images.getJSONArray("backdrop_sizes");
         backdropSize = backdropSizeOptions.optString(1, "w780");
     }
+
+    public Config() {}
 
     // helper method for constructing url
     public String getImageUrl (String size, String path) {

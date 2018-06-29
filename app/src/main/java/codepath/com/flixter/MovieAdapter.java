@@ -1,8 +1,10 @@
 package codepath.com.flixter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -10,8 +12,12 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.parceler.Parcels;
+
 import java.util.ArrayList;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import codepath.com.flixter.models.Config;
 import codepath.com.flixter.models.Movie;
 import jp.wasabeef.glide.transformations.RoundedCornersTransformation;
@@ -86,22 +92,51 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.ViewHolder> 
         return movies.size();
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
 
         // track views
 
-        ImageView ivPosterImage;
-        ImageView ivBackdropImage;
-        TextView tvTitle;
-        TextView tvOverview;
+        @Nullable @BindView(R.id.ivPosterImage) ImageView ivPosterImage;
+        @Nullable @BindView(R.id.ivBackdropImage) ImageView ivBackdropImage;
+        @BindView(R.id.tvTitle) TextView tvTitle;
+        @BindView(R.id.tvOverview) TextView tvOverview;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            ButterKnife.bind(this, itemView);
             // lookup view objects by id
-            ivPosterImage = (ImageView) itemView.findViewById(R.id.ivPosterImage);
-            ivBackdropImage = (ImageView) itemView.findViewById(R.id.ivBackdropImage);
-            tvTitle = (TextView) itemView.findViewById(R.id.tvTitle);
-            tvOverview = (TextView) itemView.findViewById(R.id.tvOverview);
+
+            itemView.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            int position = getAdapterPosition();
+            // ensure valid position
+            if (position != RecyclerView.NO_POSITION) {
+                // get movie at position
+                Movie movie = movies.get(position);
+                Intent intent = new Intent(context, MovieDetailsActivity.class);
+                intent.putExtra(Movie.class.getSimpleName(), Parcels.wrap(movie));
+                intent.putExtra(Config.class.getSimpleName(), Parcels.wrap(config));
+                // show the activity
+                context.startActivity(intent);
+            }
         }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -17,6 +17,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+import butterknife.BindString;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 import codepath.com.flixter.models.Config;
 import codepath.com.flixter.models.Movie;
 import cz.msebera.android.httpclient.Header;
@@ -25,6 +28,7 @@ public class MovieListActivity extends AppCompatActivity {
 
     public final static String API_BASE_URL = "https://api.themoviedb.org/3";
     public final static String API_KEY_PARAM = "api_key";
+    @BindString(R.string.api_key) public String api_key;
     // logging calls
     public final static String TAG = "MovieListActivity";
 
@@ -33,7 +37,7 @@ public class MovieListActivity extends AppCompatActivity {
     // list of currently playing movies
     ArrayList<Movie> movies;
     // recycler view
-    RecyclerView rvMovies;
+    @BindView(R.id.rvMovies) RecyclerView rvMovies;
     // the adapter wired to the recycler view
     MovieAdapter adapter;
 
@@ -42,14 +46,16 @@ public class MovieListActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_movie_list);
+        ButterKnife.bind(this);
+
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
         // init client
         client = new AsyncHttpClient();
 
         movies = new ArrayList<>();
         // init adapter-- movies array can't be reinstated
         adapter = new MovieAdapter(movies);
-
-        rvMovies = (RecyclerView) findViewById(R.id.rvMovies);
         rvMovies.setLayoutManager(new LinearLayoutManager(this));
         rvMovies.setAdapter(adapter);
 
@@ -63,7 +69,7 @@ public class MovieListActivity extends AppCompatActivity {
         String url = API_BASE_URL + "/movie/now_playing";
         // set request parameters
         RequestParams params = new RequestParams();
-        params.put(API_KEY_PARAM, getString(R.string.api_key));
+        params.put(API_KEY_PARAM, api_key);
         // execute GET request using client to get JSON response
         client.get(url, params, new JsonHttpResponseHandler() {
             @Override
@@ -98,7 +104,7 @@ public class MovieListActivity extends AppCompatActivity {
         String url = API_BASE_URL + "/configuration";
         // set request parameters
         RequestParams params = new RequestParams();
-        params.put(API_KEY_PARAM, getString(R.string.api_key));
+        params.put(API_KEY_PARAM, api_key);
         // execute GET request using client to get JSON response
         client.get(url, params, new JsonHttpResponseHandler() {
             @Override
