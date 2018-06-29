@@ -26,6 +26,8 @@ The following **additional** features are implemented:
 
 * [x] List anything else that you can get done to improve the app functionality!
   *[x] User can navigate up from MovieTrailerActivity to the "home" screen with the full list of movies using an ActionBar back button
+  *[x] User can view a custom home page app icon designed through [Roman Nurik's](https://romannurik.github.io/AndroidAssetStudio/index.html) app icon design program. 
+  *[x] User can start YouTube trailer from both portrait and landscape mode.
 
 
 ## Video Walkthrough
