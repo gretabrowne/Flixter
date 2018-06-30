@@ -29,6 +29,7 @@ The following **additional** features are implemented:
 * [x] User can start YouTube trailer from both portrait and landscape mode
 * [x] Added getId() function in the Movie class to retrieve stored id value and avoid getting it more than once
 * [x] API call for movie trailer filters out non-YouTube videos using the "site" value
+* [x] Newly designed "Flixter" heading
 
 
 ## Video Walkthrough
