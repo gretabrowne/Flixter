@@ -27,13 +27,17 @@ The following **additional** features are implemented:
 * [x] User can navigate up from MovieTrailerActivity to the "home" screen with the full list of movies using an ActionBar back button
 * [x] User can view a custom home page app icon designed through [Roman Nurik's](https://romannurik.github.io/AndroidAssetStudio/index.html) app icon design program.
 * [x] User can start YouTube trailer from both portrait and landscape mode
+* [x] Added getId() function in the Movie class to retrieve stored id value and avoid getting it more than once
+* [x] API call for movie trailer filters out non-YouTube videos using the "site" value
 
 
 ## Video Walkthrough
 
 Here's a walkthrough of implemented user stories:
 
-<img src='https://i.imgur.com/4CP6YHp.gif' title='Flixter Video Walkthrough' width='' alt='Video Walkthrough' />
+<img src='https://i.imgur.com/FXWreZT.gif' title='Flixter Video Walkthrough Horizontal' width='' alt='Video Walkthrough' />
+
+<img src='https://i.imgur.com/bd94r5Y.gif' title='Flixter Video Walkthrough Vertical' width='' alt='Video Walkthrough' />
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
 
