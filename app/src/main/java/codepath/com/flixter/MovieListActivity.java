@@ -48,9 +48,6 @@ public class MovieListActivity extends AppCompatActivity {
         setContentView(R.layout.activity_movie_list);
         ButterKnife.bind(this);
 
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-        // init client
         client = new AsyncHttpClient();
 
         movies = new ArrayList<>();

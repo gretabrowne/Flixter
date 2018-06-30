@@ -60,6 +60,7 @@ public class MovieDetailsActivity extends AppCompatActivity {
         final String backdropUrl = config.getImageUrl(config.getBackdropSize(), movie.getBackdropPath());
         im = findViewById(R.id.imageView);
 
+
         int radius = 30;
         int margin = 10;
         GlideApp.with(this)
@@ -88,6 +89,13 @@ public class MovieDetailsActivity extends AppCompatActivity {
                     try {
                         JSONArray results = response.getJSONArray("results");
                         // iterate through array, create movie objects
+                        String site;
+                        for (int i = 0; i < results.length(); i++) {
+                            site = results.getJSONObject(i).getString("site");
+                            if (!site.equals("youtube") && !site.equals("YouTube")) {
+                                results.remove(i);
+                            }
+                        }
                         String videoId = null;
                         videoId = results.getJSONObject(0).getString("key");
                         if (videoId != null) {
@@ -95,7 +103,6 @@ public class MovieDetailsActivity extends AppCompatActivity {
                             intent.putExtra(VIDEO_ID, videoId);
                             startActivity(intent);
                         }
-                        // Log.i(TAG, String.format("Loaded %s movies", results.length()));
 
                      } catch (JSONException e) {
                         Log.i("MovieTrailerActivity","Failed to parse now playing movies");
